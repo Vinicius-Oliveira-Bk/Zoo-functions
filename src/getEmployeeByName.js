@@ -1,14 +1,11 @@
 const { employees } = require('../data/zoo_data');
 const data = require('../data/zoo_data');
 
-function getEmployeeByName(...employeeName) {
+function getEmployeeByName(employeeName) {
   // seu código aqui
+  if (employeeName === undefined) {
+    return {};
+  } return employees.find((p) => p.firstName === employeeName || p.lastName === employeeName);
 }
-console.log(getEmployeeByName('Nigel'));
 
 module.exports = getEmployeeByName;
-
-/* const listEmployee = [{}];
-employeeName.forEach((name) => listEmployee.push(employees.find((ob) => ob.firstName === name)));
-if (listEmployee.length !== 0) {
-  return listEmployee; */
