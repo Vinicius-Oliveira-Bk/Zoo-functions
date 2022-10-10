@@ -39,6 +39,9 @@ const daysOpening = {
 };
 
 function validEntries(test) {
+  if (test === undefined) {
+    return daysOpening;
+  }
   if (!animals.includes(test)) {
     return daysOpening;
   }
@@ -47,30 +50,31 @@ function validEntries(test) {
   }
 }
 
+function returnDays(day) {
+  const { [day]: { exhibition,
+  } } = daysOpening;
+  const { open, close } = hours[day];
+  const weekDay = { [day]: { officeHour: `Open from ${open}am until ${close}pm`,
+    exhibition,
+  } };
+  return weekDay;
+}
+
 function availabilityAnimals(animal) {
   const encontraAnimal = species.find((element) => element.name === animal);
   return encontraAnimal.availability;
 }
 
 function getSchedule(scheduleTarget) {
-  validEntries(scheduleTarget);
   const monday = { [scheduleTarget]: { officeHour: 'CLOSED',
     exhibition: 'The zoo will be closed!' } };
-  if (scheduleTarget === undefined) {
-    return daysOpening;
-  } if (animals.includes(scheduleTarget)) {
+  if (animals.includes(scheduleTarget)) {
     return availabilityAnimals(scheduleTarget);
   } if (scheduleTarget === 'Monday') {
     return monday;
   } if (days.includes(scheduleTarget)) {
-    const { [scheduleTarget]: { exhibition,
-    } } = daysOpening;
-    const { open, close } = hours[scheduleTarget];
-    const weekDay = { [scheduleTarget]: { officeHour: `Open from ${open}am until ${close}pm`,
-      exhibition,
-    } };
-    return weekDay;
-  }
+    return returnDays(scheduleTarget);
+  } return validEntries(scheduleTarget);
 }
 
 // console.log(availabilityAnimals('lions'));
