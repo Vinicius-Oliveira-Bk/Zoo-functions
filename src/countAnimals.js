@@ -13,14 +13,11 @@ function countAnimals(animal) {
     return species.filter(({ name: nome }) => animal.specie === nome)
       .map(({ residents }) => residents.length)[0];
   }
-  return species.filter(({ name: nome }) => animal.specie === nome)
-    .map(({ residents }) => residents.sex)[0].length
-    && species.filter(({ sex: sexo }) => animal.sex === sexo).map;
+  const especie = species.find((element) => animal.specie === element.name);
+  const { residents } = especie;
+  return residents.filter((element) => animal.sex === element.sex).length;
 }
 
-/* species.filter((element, index) => element[index.name] === animal.specie)
-    .filter((element, index) => animal.sex === element[index.residents[index.sex]]).length; */
-
-console.log(countAnimals({ specie: 'elephants', sex: 'male' }));
+/* console.log(countAnimals({ specie: 'bears', sex: 'female' })); */
 
 module.exports = countAnimals;
