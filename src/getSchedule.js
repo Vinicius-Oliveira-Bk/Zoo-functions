@@ -38,36 +38,43 @@ const daysOpening = {
   Monday: { officeHour: 'CLOSED', exhibition: 'The zoo will be closed!' },
 };
 
-function validEntries(scheduleTarget) {
-  if (scheduleTarget === undefined) {
-    return daysOpening;
-  } if (!animals.includes(scheduleTarget)) {
+function validEntries(test) {
+  if (!animals.includes(test)) {
     return daysOpening;
   }
-  if (!days.includes(scheduleTarget)) {
+  if (!days.includes(test)) {
     return daysOpening;
   }
+}
+
+function availabilityAnimals(animal) {
+  const encontraAnimal = species.find((element) => element.name === animal);
+  return encontraAnimal.availability;
 }
 
 function getSchedule(scheduleTarget) {
-  // seu código aqui
   validEntries(scheduleTarget);
-  const mondayDay = { [scheduleTarget]: { officeHour: 'CLOSED',
+  const monday = { [scheduleTarget]: { officeHour: 'CLOSED',
     exhibition: 'The zoo will be closed!' } };
-  if (scheduleTarget === 'Monday') {
-    return mondayDay;
-  }
-  if (days.includes(scheduleTarget)) {
+  if (scheduleTarget === undefined) {
+    return daysOpening;
+  } if (animals.includes(scheduleTarget)) {
+    return availabilityAnimals(scheduleTarget);
+  } if (scheduleTarget === 'Monday') {
+    return monday;
+  } if (days.includes(scheduleTarget)) {
+    const { [scheduleTarget]: { exhibition,
+    } } = daysOpening;
     const { open, close } = hours[scheduleTarget];
     const weekDay = { [scheduleTarget]: { officeHour: `Open from ${open}am until ${close}pm`,
-      exhibition: [] } };
+      exhibition,
+    } };
     return weekDay;
-  }
-  if (animals.includes(scheduleTarget)) {
-    return 0;
   }
 }
 
-console.log(getSchedule('Tuesday'));
+// console.log(availabilityAnimals('lions'));
+// console.log(getSchedule('Tuesday'));
+// console.log(validEntries('Tuesday'));
 
 module.exports = getSchedule;
