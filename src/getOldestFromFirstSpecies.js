@@ -8,8 +8,8 @@ function getOldestFromFirstSpecies(idEmployee) {
   const encontraAnimal = species.find((element) => responsibleFor[0] === element.id);
   const { residents } = encontraAnimal;
   const animalByAge = residents.sort((a, b) => a.age - b.age);
-  const arrayAnimal = [`${animalByAge.at(-1).name}`,
-    `${animalByAge.at(-1).sex}`, animalByAge.at(-1).age];
+  const arrayAnimal = [`${animalByAge[animalByAge.length - 1].name}`,
+    `${animalByAge[animalByAge.length - 1].sex}`, animalByAge[animalByAge.length - 1].age];
   return arrayAnimal;
 }
 
